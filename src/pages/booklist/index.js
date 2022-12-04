@@ -1,7 +1,7 @@
 import booklist from "./booklist.json";
-import BooklistItem from "./booklistitem";
+import BookListItem from "./booklistitem";
 
-const Booklist = () => {
+const BookList = () => {
     return (
         <div className="container">
             <div className="row">
@@ -25,10 +25,10 @@ const Booklist = () => {
             <p className="ps-3 pt-3">{booklist.description}</p>
             <div className="my-4 wd-bg-blue rounded">
                 <div className="d-flex flex-wrap">
-                    {booklist.books.map(element => <BooklistItem key={element.isbn13} item={element.isbn13}/>)}
+                    {booklist.books.map(element => <BookListItem key={element.isbn13} isbn={element.isbn13}/>)}
                 </div>
             </div>
         </div>
     );
 }
-export default Booklist;
+export default BookList;

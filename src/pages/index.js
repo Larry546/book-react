@@ -3,7 +3,7 @@ import {Routes, Route} from "react-router";
 import Home from "./home";
 import Login from "./login";
 import Search from "./search";
-import Booklist from "./booklist";
+import BookList from "./booklist";
 import Profile from "./profile/own";
 import ProfileOther from "./profile/other";
 import EditProfile from "./profile/edit-profile";
@@ -17,7 +17,7 @@ function MyApp() {
                 <Route index element={<Home/>}/>
                 <Route path="login" element={<Login/>}/>
                 <Route path="search" element={<Search/>}/>
-                <Route path="booklist" element={<Booklist/>}/>
+                <Route path="booklist" element={<BookList/>}/>
                 <Route path="profile" element={<Profile/>}/>
                 <Route path="profile-other" element={<ProfileOther/>}/>
                 <Route path="edit-profile" element={<EditProfile/>}/>
