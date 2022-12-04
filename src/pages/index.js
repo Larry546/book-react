@@ -1,4 +1,3 @@
-import Nav from "../temp-nav";
 import {Routes, Route} from "react-router";
 import Home from "./home";
 import Login from "./login";
@@ -12,7 +11,6 @@ import Book from "./book";
 function MyApp() {
     return (
         <div>
-            <Nav/>
             <Routes>
                 <Route index element={<Home/>}/>
                 <Route path="login" element={<Login/>}/>

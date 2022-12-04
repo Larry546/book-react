@@ -1,23 +1,13 @@
 import React from "react";
-// import "./index.css";
 import LikedBooklistItem from "../own/liked-booklist-item";
 import CreatedBooklistItem from "../own/created-booklist-item";
+import Header from "../../header";
+
 const ProfileOther = () => {
     return(
         <div className="container">
-            <div className="clearfix">
-                {/*<img className="rounded-circle float-end m-3" width="35"
-                     src={"https://bootdey.com/img/Content/avatar/avatar7.png"} alt="avatar-1">
-                </img>*/}
-                <button className="btn btn-secondary rounded-pill float-end m-3">
-                    <i className="bi bi-search me-2"></i>Search</button>
-                <button className="btn btn-secondary rounded-pill float-start m-3">
-                    <i className="bi bi-house me-2"></i>Home</button>
-            </div>
+            <Header search={false}/>
             <div className="text-center mt-5">
-                {/*<img className="rounded-circle align-items-center" width="150"
-                     src={"https://bootdey.com/img/Content/avatar/avatar6.png"} alt="avatar-2">
-                </img>*/}
                 <h4 className="fw-bold">Other name</h4>
                 <p className="mt-2 text-secondary">@handle-other</p>
                 <p className="mt-2 text-dark ">Happy Boy is always happy</p>

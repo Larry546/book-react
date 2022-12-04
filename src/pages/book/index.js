@@ -1,14 +1,16 @@
 import React from "react";
+import Header from "../header";
 
 const Book = () => {
     return (
         <div className="container">
+            <Header/>
             <div className="row">
                 <div className="card mt-3 col-4 wd-bg-sameblue">
                     <div className="card-header">BOOK</div>
                     <div className="card-img text-center">
-                        <img className="rounded-3"
-                             src="/images/bookship.jpeg" height={500} alt={"BOOK"}/>
+                        <img className="rounded-bottom col-12"
+                             src="/images/bookship.jpeg" alt={"BOOK"}/>
                     </div>
                 </div>
                 <div className="card mt-3 col-8 wd-bg-sameblue">

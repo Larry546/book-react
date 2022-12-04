@@ -1,28 +1,20 @@
 import React from "react";
+import Header from "../../header";
 
 const EditProfile = () => {
     return (
         <div className="container">
-            {/*<div className="row">*/}
-            {/* <div className="card mt-3 mb-4 col-4">
-                    <div className="card-header">Profile Avatar</div>
-                    <div className="card-body text-center">
-                        <img className="rounded-circle mb-2"
-                             src="https://bootdey.com/img/Content/avatar/avatar7.png" width="150" alt="edit-profile"/>
-                        <div className="small text-muted mb-4">
-                            <button className="btn btn-primary">Change Avatar</button>
-                        </div>
-                    </div>
-                </div>*/}
-
+            <Header/>
             <div className="card mt-3 justify-content-center col-8 offset-2 {/*col-8*/} wd-bg-sameblue">
-                <div className="card-header">Profile Details</div>
+                <div className="card-header">
+                    Profile Details
+                </div>
                 <div className="card-body">
                     <form>
                         <div className="row gx-3 mb-3">
                             <div className="col-md-6">
-                                <label htmlFor="userNameInput" className="form-label">User name</label>
-                                <textarea className="form-control" id="userNameinput">My name</textarea>
+                                <label htmlFor="userNameInput" className="form-label">Username</label>
+                                <textarea className="form-control" id="userNameInput">My name</textarea>
                             </div>
                             <div className="col-md-6">
                                 <label htmlFor="passwordInput" className="form-label">Password</label>
@@ -35,22 +27,25 @@ const EditProfile = () => {
                         </div>
                         <div className="mb-3">
                             <label htmlFor="locationInput" className="form-label">Location</label>
-                            <textarea className="form-control" id="locationInput">Boston,MA</textarea>
+                            <input className="form-control" id="locationInput" />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="emailInput" className="form-label">Email</label>
+                            <input className="form-control" id="emailInput" />
                         </div>
                         <div className="mb-3">
                             <label htmlFor="websiteInput" className="form-label">Website</label>
-                            <textarea className="form-control" id="websiteInput">website</textarea>
+                            <input className="form-control" id="websiteInput" />
                         </div>
                         <div className="mb-3">
                             <label htmlFor="birthInput" className="form-label">Date of Birth</label>
-                            <textarea className="form-control" id="birthInput">01/10/1999</textarea>
+                            <input className="form-control" type="date" />
                         </div>
                         <button className="btn btn-primary rounded-pill me-3">Save changes</button>
                         <button className="btn btn-secondary rounded-pill">Back</button>
                     </form>
                 </div>
             </div>
-            {/*</div>*/}
         </div>
     );
 
