@@ -8,6 +8,7 @@ const BookListItem = ({isbn}) => {
         const fetchInfo = async () => {
             let bookInfo = await getBookInfo(isbn);
             setInfo(bookInfo);
+
         }
         fetchInfo().catch(e => console.log(e));
     }, [isbn])
