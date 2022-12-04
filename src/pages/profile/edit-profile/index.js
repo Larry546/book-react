@@ -14,6 +14,7 @@ const EditProfile = () => {
                         </div>
                     </div>
                 </div>*/}
+
             <div className="card mt-3 justify-content-center col-8 offset-2 {/*col-8*/} wd-bg-sameblue">
                 <div className="card-header">Profile Details</div>
                 <div className="card-body">
