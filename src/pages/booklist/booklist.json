@@ -1,0 +1,17 @@
+{
+  "title":"Best 10 Books for MongoDB",
+  "creator":"Jackson",
+  "description":"Here are the books recommended for learning MongoDB. They will help a lot.",
+  "books":[
+    {"isbn13":"1001650286196"},
+    {"isbn13":"9780134655536"},
+    {"isbn13":"9781430230519"},
+    {"isbn13":"9781430257943"},
+    {"isbn13":"9781449303211"},
+    {"isbn13":"9781449304614"},
+    {"isbn13":"9781449310370"},
+    {"isbn13":"9781449314361"},
+    {"isbn13":"9781449337391"},
+    {"isbn13":"9781449340049"}
+  ]
+}
