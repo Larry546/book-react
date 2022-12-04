@@ -5,9 +5,11 @@ const Home = () => {
     return (
         <div className="container">
             <div className="clearfix">
-                <button className="btn btn-secondary rounded-pill float-end m-3">Log In</button>
-                <button className="btn btn-secondary rounded-pill float-end m-3">
-                    <i className="bi bi-search me-2"></i>Search</button>
+                <a href="/login">
+                    <button className="btn btn-secondary rounded-pill float-end m-3">Log In</button></a>
+                <a href="/search">
+                    <button className="btn btn-secondary rounded-pill float-end m-3">
+                        <i className="bi bi-search me-2"></i>Search</button></a>
                 <img height={50} src="/images/logo2.png" className="float-start me-4" alt="logo"/>
                 <h1 className="fw-bold m-3 mt-4">WELCOME TO BOOKLY</h1>
             </div>
