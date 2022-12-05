@@ -29,7 +29,7 @@ function MyApp() {
             <Route path="profile" element={<Profile/>}/>
             <Route path="profile-other" element={<ProfileOther/>}/>
             <Route path="edit-profile" element={<EditProfile/>}/>
-            <Route path="book" element={<Book/>}/>
+            <Route path="book/:isbn" element={<Book/>}/>
           </Routes>
         </div>
       </Provider>

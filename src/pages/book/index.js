@@ -1,16 +1,27 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Header from "../header";
+import {useParams} from "react-router";
+import {getBookInfo} from "../../services/book-service";
 
 const Book = () => {
+    const {isbn} = useParams();
+    const [bookInfo, setBookInfo] = useState({});
+    useEffect(() => {
+        const fetchInfo = async () => {
+            let res = await getBookInfo(isbn);
+            setBookInfo(res);
+        }
+        fetchInfo().catch(e => console.log(e));
+    }, [isbn])
     return (
         <div className="container">
             <Header/>
             <div className="row">
                 <div className="card mt-3 col-4 wd-bg-sameblue">
-                    <div className="card-header">BOOK</div>
-                    <div className="card-img text-center">
-                        <img className="rounded-bottom col-12"
-                             src="/images/bookship.jpeg" alt={"BOOK"}/>
+                    {/*<div className="card-header">{bookInfo.title}</div>*/}
+                    <div className="card-img col-12">
+                        <img className="rounded-bottom"
+                             src={bookInfo.image} alt={"BOOK"} width="100%"/>
                     </div>
                 </div>
                 <div className="card mt-3 col-8 wd-bg-sameblue">
@@ -19,34 +30,31 @@ const Book = () => {
                         <form>
                             <div className="row mb-3">
                                 <h5>Book name: </h5>
-                                <span className="text-secondary">book 1</span>
+                                <span className="text-secondary">{bookInfo.title}</span>
                             </div>
                             <div className="mb-3">
                                 <h5>Book author: </h5>
-                                <span className="text-secondary"> Jose</span>
+                                <span className="text-secondary">{bookInfo.authors}</span>
                             </div>
                             <div className="mb-3">
                                 <h5>Book price: </h5>
-                                <span className="text-secondary"> $1000</span>
+                                <span className="text-secondary">{bookInfo.price}</span>
                             </div>
                             <div className="mb-3">
                                 <h5>Publish Year: </h5>
-                                <span className="text-secondary"> 2018</span>
+                                <span className="text-secondary">{bookInfo.year}</span>
                             </div>
                             <div className="mb-3">
                                 <h5>Publisher: </h5>
-                                <span className="text-secondary"> Manning</span>
+                                <span className="text-secondary">{bookInfo.publisher}</span>
                             </div>
                             <div className="mb-3">
                                 <h5>Description: </h5>
-                                <span className="text-secondary"> An application running in the cloud can benefit from incredible efficiencies,
-                                    but they come with unique security threats too. A DevOps team's highest priority is understanding those
-                                    risks and hardening the system against them.Securing DevOps teaches you the essential techniques to secure your cloud ...
-                                </span>
+                                <span className="text-secondary">{bookInfo.desc}</span>
                             </div>
                             <div className="mb-3">
                                 <h5>More details: </h5>
-                                <span className="text-secondary"> https://itbook.store/books/9781617294136</span>
+                                <span className="text-secondary">{bookInfo.url}</span>
                             </div>
                         </form>
                     </div>
