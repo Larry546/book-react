@@ -60,16 +60,20 @@ const Profile = () => {
                 <span className="text-secondary ps-4">{(currentUser.dob && currentUser.dob.split('T')[0])|| "date of birth"}</span>
                 <p>{currentUser.bio || "bio"}</p>
                 <span className="fw-bolder">10</span>
-                <span className="text-secondary"> Following</span>
+                <Link to="/following" className="text-decoration-none">
+                    <span className="text-danger"> Following</span>
+                </Link>
                 <span className="fw-bolder ps-4">7</span>
-                <span className="text-secondary"> Follower</span>
+                <Link to="/follower" className="text-decoration-none">
+                    <span className="text-primary"> Follower</span>
+                </Link>
             </div>
             <div className="text-center mt-3">
                 <Link to="/edit-profile">
                     <button className="btn btn-primary rounded-pill">Edit Profile</button>
                 </Link>
             </div>
-            <div className="mt-4">
+            <div className="mt-4 offset-1">
                 <ul className="list-group list-group-horizontal">
                     <li className="list-group-item wd-bg-blue w-25">
                         <h4 className="fw-bold m-3">Created<br></br>BOOKLISTS</h4>

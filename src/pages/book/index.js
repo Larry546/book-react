@@ -52,6 +52,21 @@ const Book = () => {
                     </div>
                 </div>
             </div>
+            <div className="row">
+                <div className="card mt-3 col-8 offset-4 wd-bg-sameblue">
+                    <div className="card-header">Comments for this book</div>
+                    <div className="card-body list-group wd-bg-sameblue">
+                        <li className="list-group-item wd-bg-sameblue">
+                            <button className="btn btn-primary w-25 float-end">Comment</button>
+                            <input placeholder="Please input the comment" className="form-control w-75"/>
+                        </li>
+                        <li className="list-group-item border wd-bg-sameblue">
+                            <button className="btn btn-danger float-end ms-2">Delete</button>
+                            <p className="m-1" ><span className="fs-5 text-secondary">1234:</span> Good books</p>
+                        </li>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 
