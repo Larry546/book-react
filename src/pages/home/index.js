@@ -1,24 +1,25 @@
 import LatestBooklistItem from "./latest-booklist-item";
 import LatestBookItem from "./latest-book-item";
-import {Link} from "react-router-dom";
+import UserButton from "../header/user-button";
+import SearchButton from "../header/search-button";
 
 const Home = () => {
   return (
       <div className="container">
-        <div className="clearfix">
-          <Link to="/login">
-            <button className="btn btn-secondary rounded-pill float-end m-3">Log
-              In
-            </button>
-          </Link>
-          <Link to="/search">
-            <button className="btn btn-secondary rounded-pill float-end m-3">
-              <i className="bi bi-search me-2"></i>Search
-            </button>
-          </Link>
-          <img height={50} src="/images/logo2.png" className="float-start me-4"
-               alt="logo"/>
-          <h1 className="fw-bold m-3 mt-4">WELCOME TO BOOKLY</h1>
+        <div className="d-flex align-items-center justify-content-between">
+          <div className="d-flex align-items-center">
+            <img height={50} src="/images/logo2.png" className="me-4"
+                 alt="logo"/>
+            <h1 className="fw-bold m-3 mt-4">WELCOME TO BOOKLY</h1>
+          </div>
+          <div className="d-flex">
+            <div className="me-3">
+              <SearchButton/>
+            </div>
+            <div>
+              <UserButton/>
+            </div>
+          </div>
         </div>
 
         <div className="mt-4">

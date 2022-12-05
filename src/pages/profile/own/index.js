@@ -2,33 +2,63 @@ import React from "react";
 // import "./index.css";
 import CreatedBooklistItem from "./created-booklist-item";
 import LikedBooklistItem from "./liked-booklist-item";
-import {Link} from "react-router-dom";
+import {Link, Navigate, useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {logoutThunk} from "../../../services/user/user-thunks";
+import HomeButton from "../../header/home-button";
+import SearchButton from "../../header/search-button";
 
 const Profile = () => {
+    const {currentUser} = useSelector(state => state.user);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    if (!currentUser) {
+        return <Navigate to='/login'/>
+    }
+
+
+    const handleLogout = () => {
+        dispatch(logoutThunk());
+        navigate("/");
+    }
+
     return(
         <div className="container">
             <div className="row">
                 <div className="clearfix">
-                    <Link to="/search">
-                        <button className="btn btn-secondary rounded-pill float-end mt-4">
-                            <i className="bi bi-search me-2"></i>Search
-                        </button>
-                    </Link>
-                    <Link to="/">
-                        <button className="btn btn-secondary rounded-pill float-start mt-4 me-3">
-                            <i className="bi bi-house me-2"></i>Home
-                        </button>
-                    </Link>
+                    <div className="float-end">
+                        <SearchButton/>
+                    </div>
+
+                    <div className="float-start me-3">
+                        <HomeButton/>
+                    </div>
+
+                    <button
+                        className="btn btn-secondary rounded-pill float-start mt-4"
+                        onClick={handleLogout}
+                    >
+                        logout
+                    </button>
+
+
                     {/* todo add link */}
-                    <Link to="">
-                        <button className="btn btn-secondary rounded-pill float-start mt-4">Create</button>
-                    </Link>
+                    {/*<Link to="">*/}
+                    {/*    <button className="btn btn-secondary rounded-pill float-start mt-4">Create</button>*/}
+                    {/*</Link>*/}
                 </div>
             </div>
 
             <div className="text-center mt-5">
-                <h4 className="fw-bold">My name</h4>
-                <p className="text-secondary">@handle</p>
+                <h4 className="fw-bold">{currentUser.fullname || "Full Name"}</h4>
+                <div>
+                    <span className="text-secondary">@{currentUser.username || "username"}</span>
+                </div>
+                <span className="text-secondary ps-4">{currentUser.location || "location"}</span>
+                <span className="text-secondary ps-4">{currentUser.website || "website"}</span>
+                <span className="text-secondary ps-4">{currentUser.email || "email"}</span>
+                <span className="text-secondary ps-4">{(currentUser.dob && currentUser.dob.split('T')[0])|| "date of birth"}</span>
+                <p>{currentUser.bio || "bio"}</p>
                 <span className="fw-bolder">10</span>
                 <span className="text-secondary"> Following</span>
                 <span className="fw-bolder ps-4">7</span>

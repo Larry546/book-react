@@ -2,8 +2,10 @@ import itemArray from "./items.json";   //https://api.itbook.store/1.0/search/mo
 import SearchItem from "./search-item";
 import {Link} from "react-router-dom";
 import React from "react";
+import {useSelector} from "react-redux";
 
 const Search = () => {
+    const {currentUser} = useSelector(state => state.user);
     return (
         <div className="container">
             <div className="row">
@@ -26,7 +28,7 @@ const Search = () => {
                 <div className="col-2">
                     <Link to="/login">
                         <button className="btn btn-secondary rounded-pill float-end m-3 mt-4">
-                            Log In
+                            {currentUser ? currentUser.username : "Log In"}
                         </button>
                     </Link>
                 </div>

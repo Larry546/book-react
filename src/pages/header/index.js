@@ -1,32 +1,25 @@
-import {Link} from "react-router-dom";
 import React from "react";
+import UserButton from "./user-button";
+import HomeButton from "./home-button";
+import SearchButton from "./search-button";
 
 const Header = ({search = true, home = true, user = true}) => {
   return (
       <div className="row">
         <div>
-          {search &&
-              <Link to="/search">
-                <button
-                    className="btn btn-secondary rounded-pill float-start mt-4 me-3">
-                  <i className="bi bi-search me-2"></i>Search
-                </button>
-              </Link>}
           {home &&
-              <Link to="/">
-                <button
-                    className="btn btn-secondary rounded-pill float-start mt-4">
-                  <i className="bi bi-house me-2"></i>Home
-                </button>
-              </Link>
-          }
+              <div className="float-start me-3">
+                <HomeButton/>
+              </div>}
+          {search &&
+              <div className="float-start">
+                <SearchButton/>
+              </div>}
+
           {user &&
-              <Link to="/login">
-                <button
-                    className="btn btn-secondary rounded-pill float-end mt-4">
-                  Log In
-                </button>
-              </Link>}
+              <div className="float-end">
+                <UserButton/>
+              </div>}
         </div>
       </div>
   );
