@@ -7,7 +7,7 @@ export const getBookInfo = async (isbn) => {
   return response.data;
 }
 
-export const searchBook = async (keyword, pages = 1) => {
-  const response = await axios.get(`${REMOTE_API}/search/${keyword}?page=${pages}`);
+export const searchBook = async (keyword, page = 1) => {
+  const response = await axios.get(`${REMOTE_API}/search/${keyword}?page=${page}`);
   return response.data;
 }
