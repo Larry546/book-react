@@ -1,15 +1,14 @@
-import {API_URL, api} from "../config";
+import {REACT_APP_API_RUL, api} from "../config";
 
-const USER_API_URL = `${API_URL}/user`
+const USER_API_URL = `${REACT_APP_API_RUL}/user`
 
 export const login = async (user) => {
-  console.log(process.env)
-  const response = await api.post(`${API_URL}/login`, user);
+  const response = await api.post(`${REACT_APP_API_RUL}/login`, user);
   return response.data;
 }
 
 export const logout = async () => {
-  const response = await api.post(`${API_URL}/logout`);
+  const response = await api.post(`${REACT_APP_API_RUL}/logout`);
   return response.data
 }
 
