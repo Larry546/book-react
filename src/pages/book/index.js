@@ -27,7 +27,9 @@ const Book = () => {
       let reviewRes = await getReviewByBook(isbn);
       if (currentUser) {
         let likeRes = await findUserLikeBook(currentUser._id, isbn);
-        setLike(likeRes[0]._id);
+        if (likeRes.length && likeRes[0]._id) {
+          setLike(likeRes[0]._id);
+        }
       }
       setBookInfo(res);
       setComments(reviewRes);
@@ -48,7 +50,9 @@ const Book = () => {
     if (!like.length) {
       const likeinfo = {user: currentUser._id, book: isbn};
       const res = await likebook(likeinfo);
-      setLike(res._id);
+      if (res && res._id) {
+        setLike(res._id);
+      }
     } else {
       const res = await unlikebook(like);
       if (res && res.acknowledged) {

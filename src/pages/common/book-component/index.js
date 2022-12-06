@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 const BookComponent = ({info}) => {
   return (
       <div className="col-lg-6 col-md-12">
-        <Link to={`/book/${info.isbn}`} className="text-decoration-none text-black d-flex flex-row">
+        <Link to={`/book/${info.isbn13}`} className="text-decoration-none text-black d-flex flex-row">
           <img className="rounded" height={200} src={info.image} alt={"cover"}/>
           <div className="d-flex flex-column">
             <p className="fw-bold m-3">{info.title}</p>
