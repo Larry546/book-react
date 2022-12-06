@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import FollowerListItem from "./follower-list-item";
+import FollowingListItem from "../following-list/following-list-item";
 
 const FollowingList = () => {
     return (
@@ -12,11 +13,18 @@ const FollowingList = () => {
             <div className="row">
                 <div className="card mt-3 col-8 offset-2 wd-bg-sameblue">
                     <div className="card-header text-center">Follower List</div>
-                        <div className="card-body list-group">
-                            <div className="col-6 ">
-                                <FollowerListItem/>
-                                <FollowerListItem/>
-                                <FollowerListItem/>
+                        <div className="card-body">
+                            <div className="row">
+                                <div className="col-5">
+                                    <FollowingListItem/>
+                                    <FollowingListItem/>
+                                    <FollowingListItem/>
+                                </div>
+                                <div className="col-5 offset-2">
+                                    <FollowingListItem/>
+                                    <FollowingListItem/>
+                                    <FollowingListItem/>
+                                </div>
                             </div>
                         </div>
                 </div>
