@@ -1,7 +1,8 @@
-import LatestBooklistItem from "./latest-booklist-item";
+import BookListItem from "../list-component/book-list-item";
 import LatestBookItem from "./latest-book-item";
 import UserButton from "../header/user-button";
 import SearchButton from "../header/search-button";
+import BookListComponent from "../list-component/book-list-component";
 
 const Home = () => {
   return (
@@ -23,27 +24,7 @@ const Home = () => {
         </div>
 
         <div className="mt-4">
-          <ul className="list-group list-group-horizontal wd-bg-blue">
-            <li className="list-group-item wd-bg-blue col-4">
-              <h4 className="fw-bold m-3">LATEST <br/>BOOKLISTS</h4>
-            </li>
-            <div className="row">
-              <div className="col-lg-3 col-md-6 col-sm-12">
-                <LatestBooklistItem/>
-              </div>
-              <div className="col-lg-3 col-md-6 col-sm-12">
-                <LatestBooklistItem/>
-              </div>
-              <div className="col-lg-3 col-md-6 col-sm-12">
-                <LatestBooklistItem/>
-              </div>
-              <div className="col-lg-3 col-md-6 col-sm-12">
-                <LatestBooklistItem/>
-              </div>
-            </div>
-
-          </ul>
-
+          <BookListComponent title="LATEST BOOKLISTS"/>
           <ul className="list-group list-group-horizontal mt-4 wd-bg-blue">
             <li className="list-group-item wd-bg-blue col-4">
               <h4 className="fw-bold m-3">LATEST <br/>BOOKS</h4>

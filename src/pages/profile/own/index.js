@@ -73,25 +73,57 @@ const Profile = () => {
                     <button className="btn btn-primary rounded-pill">Edit Profile</button>
                 </Link>
             </div>
-            <div className="mt-4 offset-1">
-                <ul className="list-group list-group-horizontal">
-                    <li className="list-group-item wd-bg-blue w-25">
-                        <h4 className="fw-bold m-3">Created<br></br>BOOKLISTS</h4>
+            <div className="mt-4 wd-bg-blue">
+                {currentUser && currentUser.role === "creator" &&
+                    <ul className="list-group list-group-horizontal">
+                        <li className="list-group-item wd-bg-blue w-25">
+                            <h4 className="fw-bold m-3">Created<br></br>BOOKLISTS</h4>
+                        </li>
+                        <CreatedBooklistItem/>
+                        <CreatedBooklistItem/>
+                        <CreatedBooklistItem/>
+                        <CreatedBooklistItem/>
+                    </ul>}
+
+                <ul className="list-group list-group-horizontal row">
+                    <li className="list-group-item wd-bg-blue col-4">
+                        <h4 className="fw-bold m-3">Liked<br></br>BOOK</h4>
                     </li>
-                    <CreatedBooklistItem/>
-                    <CreatedBooklistItem/>
-                    <CreatedBooklistItem/>
-                    <CreatedBooklistItem/>
+                    <div className="col-2">
+                        <LikedBooklistItem/>
+                    </div>
+                    <div className="col-2">
+                        <LikedBooklistItem/>
+                    </div>
+                    <div className="col-2">
+                        <LikedBooklistItem/>
+                    </div>
+                    <div className="col-2">
+                        <LikedBooklistItem/>
+                    </div>
                 </ul>
-                <ul className="list-group list-group-horizontal">
-                    <li className="list-group-item wd-bg-blue w-25">
+
+                <ul className="list-group list-group-horizontal row">
+                    <li className="list-group-item wd-bg-blue col-2">
                         <h4 className="fw-bold m-3">Liked<br></br>BOOKLISTS</h4>
                     </li>
-                    <LikedBooklistItem/>
-                    <LikedBooklistItem/>
-                    <LikedBooklistItem/>
-                    <LikedBooklistItem/>
+                    <div className="col-2">
+                        <LikedBooklistItem/>
+                    </div>
+                    <div className="col-2">
+                        <LikedBooklistItem/>
+                    </div>
+                    <div className="col-2">
+                        <LikedBooklistItem/>
+                    </div>
+                    <div className="col-2">
+                        <LikedBooklistItem/>
+                    </div>
+                    <div className="col-2">
+                        <LikedBooklistItem/>
+                    </div>
                 </ul>
+
             </div>
         </div>
     );
