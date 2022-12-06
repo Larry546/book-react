@@ -1,7 +1,6 @@
 import React from "react";
-import LikedBooklistItem from "../own/liked-booklist-item";
-import CreatedBooklistItem from "../own/created-booklist-item";
 import Header from "../../header";
+import ListComponent from "../../list-component/list-component";
 
 const ProfileOther = () => {
     return(
@@ -20,24 +19,8 @@ const ProfileOther = () => {
                 <button className="btn btn-danger rounded-pill">Follow</button>
             </div>
             <div className="mt-4">
-                <ul className="list-group list-group-horizontal">
-                    <li className="list-group-item wd-bg-blue w-25">
-                        <h4 className="fw-bold m-3">Created<br></br>BOOKLISTS</h4>
-                    </li>
-                    <CreatedBooklistItem/>
-                    <CreatedBooklistItem/>
-                    <CreatedBooklistItem/>
-                    <CreatedBooklistItem/>
-                </ul>
-                <ul className="list-group list-group-horizontal">
-                    <li className="list-group-item wd-bg-blue w-25">
-                        <h4 className="fw-bold m-3">Liked<br></br>BOOKLISTS</h4>
-                    </li>
-                    <LikedBooklistItem/>
-                    <LikedBooklistItem/>
-                    <LikedBooklistItem/>
-                    <LikedBooklistItem/>
-                </ul>
+                <ListComponent title="LIKED BOOKS"/>
+                <ListComponent title="LIKED BOOKLISTS"/>
             </div>
         </div>
     );

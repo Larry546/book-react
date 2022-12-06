@@ -1,12 +1,10 @@
 import React from "react";
-// import "./index.css";
-import CreatedBooklistItem from "./created-booklist-item";
-import LikedBooklistItem from "./liked-booklist-item";
 import {Link, Navigate, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {logoutThunk} from "../../../services/user/user-thunks";
 import HomeButton from "../../header/home-button";
 import SearchButton from "../../header/search-button";
+import ListComponent from "../../list-component/list-component";
 
 const Profile = () => {
     const {currentUser} = useSelector(state => state.user);
@@ -60,11 +58,11 @@ const Profile = () => {
                     'T')[0]) || "date of birth"}</span>
                 <p>{currentUser.bio || "bio"}</p>
                 <Link to="/following" className="text-decoration-none">
-                    <span className="fw-bolder">10</span>
+                    <span className="fw-bolder text-secondary">10</span>
                     <span className="text-danger"> Following</span>
                 </Link>
                 <Link to="/follower" className="text-decoration-none">
-                    <span className="fw-bolder ps-4">7</span>
+                    <span className="fw-bolder ps-4 text-secondary">7</span>
                     <span className="text-primary"> Follower</span>
                 </Link>
             </div>
@@ -75,55 +73,9 @@ const Profile = () => {
             </div>
             <div className="mt-4 wd-bg-blue">
                 {currentUser && currentUser.role === "creator" &&
-                    <ul className="list-group list-group-horizontal">
-                        <li className="list-group-item wd-bg-blue w-25">
-                            <h4 className="fw-bold m-3">Created<br></br>BOOKLISTS</h4>
-                        </li>
-                        <CreatedBooklistItem/>
-                        <CreatedBooklistItem/>
-                        <CreatedBooklistItem/>
-                        <CreatedBooklistItem/>
-                    </ul>}
-
-                <ul className="list-group list-group-horizontal row">
-                    <li className="list-group-item wd-bg-blue col-4">
-                        <h4 className="fw-bold m-3">Liked<br></br>BOOK</h4>
-                    </li>
-                    <div className="col-2">
-                        <LikedBooklistItem/>
-                    </div>
-                    <div className="col-2">
-                        <LikedBooklistItem/>
-                    </div>
-                    <div className="col-2">
-                        <LikedBooklistItem/>
-                    </div>
-                    <div className="col-2">
-                        <LikedBooklistItem/>
-                    </div>
-                </ul>
-
-                <ul className="list-group list-group-horizontal row">
-                    <li className="list-group-item wd-bg-blue col-2">
-                        <h4 className="fw-bold m-3">Liked<br></br>BOOKLISTS</h4>
-                    </li>
-                    <div className="col-2">
-                        <LikedBooklistItem/>
-                    </div>
-                    <div className="col-2">
-                        <LikedBooklistItem/>
-                    </div>
-                    <div className="col-2">
-                        <LikedBooklistItem/>
-                    </div>
-                    <div className="col-2">
-                        <LikedBooklistItem/>
-                    </div>
-                    <div className="col-2">
-                        <LikedBooklistItem/>
-                    </div>
-                </ul>
-
+                    <ListComponent title="CREATED BOOKLISTS" isList={true}/>}
+                <ListComponent title="LIKED BOOKS"/>
+                <ListComponent title="LIKED BOOKLISTS"/>
             </div>
         </div>
     );
