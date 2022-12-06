@@ -12,7 +12,7 @@ const ListComponent = ({
 }) => {
   return (
       <ul className="list-group list-group-horizontal wd-bg-blue">
-        <li className="list-group-item wd-bg-blue col-4 d-flex align-items-center">
+        <li className="list-group-item wd-bg-blue col-3 d-flex align-items-center">
           <h4 className="fw-bold m-3">
             {title.split(' ')[0]}<br/>{title.split(' ')[1]}
           </h4>
