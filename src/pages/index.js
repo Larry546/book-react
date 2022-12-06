@@ -10,8 +10,6 @@ import Book from "./book";
 import {configureStore} from "@reduxjs/toolkit";
 import userReducer from "./reducers/user-reducer";
 import {Provider} from "react-redux";
-import FollowingList from "./following-list";
-import FollowerList from "./follower-list";
 
 const store = configureStore({
   reducer: {
@@ -31,9 +29,7 @@ function MyApp() {
             <Route path="profile" element={<Profile/>}/>
             <Route path="profile-other" element={<ProfileOther/>}/>
             <Route path="edit-profile" element={<EditProfile/>}/>
-            <Route path="book" element={<Book/>}/>
-            <Route path="following" element={<FollowingList/>}/>
-            <Route path="follower" element={<FollowerList/>}/>
+            <Route path="book/:isbn" element={<Book/>}/>
           </Routes>
         </div>
       </Provider>
