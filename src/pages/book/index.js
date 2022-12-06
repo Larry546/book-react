@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import Header from "../header";
 import {useParams} from "react-router";
 import {getBookInfo} from "../../services/book-service";
+import CommentLitsItem from "./comment-lits-item";
 
 const Book = () => {
     const {isbn} = useParams();
@@ -22,6 +23,10 @@ const Book = () => {
                     <div className="card-img col-12">
                         <img className="rounded-bottom"
                              src={bookInfo.image} alt={"BOOK"} width="100%"/>
+                    </div>
+                    <div className="card-body text-center">
+                        {/*<i className="bi bi-heart-fill fw-bolder fs-2 text-danger"></i>*/}
+                        <i className="bi bi-heart fw-bolder fs-2 text-secondary"></i>
                     </div>
                 </div>
                 <div className="card mt-3 col-8 wd-bg-sameblue">
@@ -62,16 +67,15 @@ const Book = () => {
             </div>
             <div className="row">
                 <div className="card mt-3 col-8 offset-4 wd-bg-sameblue">
-                    <div className="card-header">Comments for this book</div>
+                    <div className="card-header fs-5 text-dark">Comments for this book</div>
                     <div className="card-body list-group wd-bg-sameblue">
-                        <li className="list-group-item wd-bg-sameblue">
+                        <li className="list-group-item border-bottom wd-bg-sameblue">
                             <button className="btn btn-primary w-25 float-end">Comment</button>
                             <input placeholder="Please input the comment" className="form-control w-75"/>
                         </li>
-                        <li className="list-group-item border wd-bg-sameblue">
-                            <button className="btn btn-danger float-end ms-2">Delete</button>
-                            <p className="m-1" ><span className="fs-5 text-secondary">1234:</span> Good books</p>
-                        </li>
+                        <CommentLitsItem/>
+                        <CommentLitsItem/>
+                        <CommentLitsItem/>
                     </div>
                 </div>
             </div>
