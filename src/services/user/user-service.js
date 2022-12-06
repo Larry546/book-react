@@ -3,7 +3,7 @@ import {API_URL, api} from "../config";
 const USER_API_URL = `${API_URL}/user`
 
 export const login = async (user) => {
-  console.log(API_URL)
+  console.log(process.env)
   const response = await api.post(`${API_URL}/login`, user);
   return response.data;
 }
