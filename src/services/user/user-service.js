@@ -3,7 +3,6 @@ import {REACT_APP_API_URL, api} from "../config";
 const USER_API_URL = `${REACT_APP_API_URL}/user`
 
 export const login = async (user) => {
-  console.log(process.env);
   const response = await api.post(`${REACT_APP_API_URL}/login`, user);
   return response.data;
 }
