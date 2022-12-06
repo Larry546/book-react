@@ -1,6 +1,6 @@
-import {REACT_APP_API_RUL, api} from "../config";
+import {REACT_APP_API_URL, api} from "../config";
 
-const REVIEW_API_URL = `${REACT_APP_API_RUL}/review`;
+const REVIEW_API_URL = `${REACT_APP_API_URL}/review`;
 
 export const createReview = async (review) => {
   const response = await api.post(`${REVIEW_API_URL}/createReview`, review);

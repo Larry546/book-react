@@ -1,6 +1,6 @@
-import {REACT_APP_API_RUL, api} from "../config";
+import {REACT_APP_API_URL, api} from "../config";
 
-const LIKEBOOK_API_URL = `${REACT_APP_API_RUL}/likebook`;
+const LIKEBOOK_API_URL = `${REACT_APP_API_URL}/likebook`;
 
 export const likebook = async (info) => {
   const response = await api.post(`${LIKEBOOK_API_URL}/like`, info);
