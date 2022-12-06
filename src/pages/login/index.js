@@ -44,7 +44,7 @@ const Login = () => {
                       <p className="text-center mt-3">Don't have an account?
                           <span>
                               {/*todo signup*/}
-                              <Link to="#" className="btn btn-link align-baseline">Sign up</Link>
+                              <Link to="/signup" className="btn btn-link align-baseline">Sign up</Link>
                           </span>
                       </p>
                   </div>

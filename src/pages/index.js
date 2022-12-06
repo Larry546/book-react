@@ -12,6 +12,7 @@ import userReducer from "./reducers/user-reducer";
 import {Provider} from "react-redux";
 import FollowingList from "./following-list";
 import FollowerList from "./follower-list";
+import SignUp from "./sign-up";
 
 const store = configureStore({
   reducer: {
@@ -34,6 +35,7 @@ function MyApp() {
             <Route path="following" element={<FollowingList/>}/>
             <Route path="follower" element={<FollowerList/>}/>
             <Route path="book/:isbn" element={<Book/>}/>
+            <Route path="signup" element={<SignUp/>}/>
           </Routes>
         </div>
       </Provider>
