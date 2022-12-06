@@ -1,6 +1,6 @@
-import UserButton from "../header/user-button";
-import SearchButton from "../header/search-button";
-import ListComponent from "../list-component/list-component";
+import UserButton from "../common/header/user-button";
+import SearchButton from "../common/header/search-button";
+import ListComponent from "../common/list-component/list-component";
 
 const Home = () => {
   return (

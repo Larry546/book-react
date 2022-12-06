@@ -2,9 +2,9 @@ import React from "react";
 import {Link, Navigate, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {logoutThunk} from "../../../services/user/user-thunks";
-import HomeButton from "../../header/home-button";
-import SearchButton from "../../header/search-button";
-import ListComponent from "../../list-component/list-component";
+import HomeButton from "../../common/header/home-button";
+import SearchButton from "../../common/header/search-button";
+import ListComponent from "../../common/list-component/list-component";
 
 const Profile = () => {
     const {currentUser} = useSelector(state => state.user);

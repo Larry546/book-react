@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import Header from "../../header";
+import Header from "../../common/header";
 import {useDispatch, useSelector} from "react-redux";
 import {Navigate, useNavigate} from "react-router-dom";
 import {updateUserThunk} from "../../../services/user/user-thunks";

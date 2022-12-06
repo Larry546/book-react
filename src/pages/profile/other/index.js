@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "../../header";
-import ListComponent from "../../list-component/list-component";
+import Header from "../../common/header";
+import ListComponent from "../../common/list-component/list-component";
 
 const ProfileOther = () => {
     return(

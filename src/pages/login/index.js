@@ -2,7 +2,7 @@ import {Link, Navigate} from "react-router-dom";
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {loginThunk} from "../../services/user/user-thunks";
-import HomeButton from "../header/home-button";
+import HomeButton from "../common/header/home-button";
 
 const Login = () => {
     const {currentUser} = useSelector(state => state.user)

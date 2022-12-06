@@ -1,9 +1,8 @@
-// import itemArray from "./items.json";   //https://api.itbook.store/1.0/search/mongodb?page=2
-import SearchItem from "./search-item";
 import React, {useState} from "react";
-import HomeButton from "../header/home-button";
-import UserButton from "../header/user-button";
-import {searchBook} from "../../services/book-service";
+import HomeButton from "../common/header/home-button";
+import UserButton from "../common/header/user-button";
+import {searchBook} from "../../services/book/book-service";
+import BookComponent from "../common/book-component";
 
 const Search = () => {
   const [keyword, setKeyword] = useState("");
@@ -60,8 +59,7 @@ const Search = () => {
                 <p className="fw-bold ps-3 pt-3">Found {searchResult.total} results</p>
                 <div className="d-flex flex-wrap">
                   {searchResult.books.map(
-                      element => <SearchItem key={element.isbn13}
-                                             item={element}/>)}
+                      (item, idx) => <BookComponent key={idx} info={item}/>)}
                 </div>
               </div>
 
