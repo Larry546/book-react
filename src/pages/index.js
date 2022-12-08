@@ -30,7 +30,7 @@ function MyApp() {
             <Route path="search" element={<Search/>}/>
             <Route path="booklist" element={<BookList/>}/>
             <Route path="profile" element={<Profile/>}/>
-            <Route path="profile-other" element={<ProfileOther/>}/>
+            <Route path="profile/:uid" element={<ProfileOther/>}/>
             <Route path="edit-profile" element={<EditProfile/>}/>
             <Route path="following" element={<FollowingList/>}/>
             <Route path="follower" element={<FollowerList/>}/>

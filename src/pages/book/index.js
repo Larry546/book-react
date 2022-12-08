@@ -12,6 +12,7 @@ import {
   likebook,
   unlikebook
 } from "../../services/like-book/like-book-service";
+import {Link} from "react-router-dom";
 
 const Book = () => {
   const {isbn} = useParams();
@@ -70,7 +71,8 @@ const Book = () => {
               <img className="rounded-bottom"
                    src={bookInfo.image} alt={"BOOK"} width="100%"/>
             </div>
-            <div className="d-flex justify-content-center p-1" onClick={handleLike}>
+            <div className="d-flex justify-content-center p-1"
+                 onClick={handleLike}>
               {like.length ?
                   <i className="bi bi-heart-fill fw-bolder fs-2 text-danger"></i>
                   :
@@ -118,19 +120,20 @@ const Book = () => {
           <div className="card mt-2 col-8 offset-4 wd-bg-sameblue pb-5">
             <div className="card-header">Comments for this book</div>
             <div className=" list-group wd-bg-sameblue">
-              {currentUser && <li
-                  className="list-group-item m-0 wd-bg-sameblue d-flex justify-content-around align-items-center">
-                <input placeholder="Please input the comment"
-                       className="form-control"
-                       value={curComment}
-                       onChange={e => setCurComment(e.target.value)}
-                />
-                <button className="btn btn-primary float-end"
-                        onClick={handleComment}
-                >
-                  Comment
-                </button>
-              </li>}
+              {currentUser &&
+                  <li
+                      className="list-group-item m-0 wd-bg-sameblue d-flex justify-content-around align-items-center">
+                    <input placeholder="Please input the comment"
+                           className="form-control"
+                           value={curComment}
+                           onChange={e => setCurComment(e.target.value)}
+                    />
+                    <button className="btn btn-primary float-end"
+                            onClick={handleComment}
+                    >
+                      Comment
+                    </button>
+                  </li>}
               {
                 comments.length ? comments.map((c, idx) =>
                         <li
@@ -142,14 +145,12 @@ const Book = () => {
                               </div>
                           }
                           <div className="m-1 row">
-                            <div
-                                className="text-secondary col-2"
-                                onClick={() => {
-                                  // todo Link to Profile
-                                }}
+                            <Link
+                                className="text-secondary col-2 text-decoration-none"
+                                to={`/profile/${c.user._id}`}
                             >
                               {c.user.fullname} @{c.user.username}:
-                            </div>
+                            </Link>
                             <div className="col-8">
                               {c.content}
                             </div>

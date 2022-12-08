@@ -22,3 +22,8 @@ export const updateUser = async (uid, updateInfo) => {
       updateInfo);
   return response.data;
 }
+
+export const getProfile = async (uid) => {
+  const response = await api.get(`${USER_API_URL}/profile/${uid}`);
+  return response.data;
+}

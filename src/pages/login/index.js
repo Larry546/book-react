@@ -55,7 +55,6 @@ const Login = () => {
                       <button className="btn btn-warning rounded w-100 mt-4" onClick={login}>Log In</button>
                       <p className="text-center mt-3">Don't have an account?
                           <span>
-                              {/*todo signup*/}
                               <Link to="/signup" className="btn btn-link align-baseline">Sign up</Link>
                           </span>
                       </p>
