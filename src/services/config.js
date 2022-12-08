@@ -1,7 +1,29 @@
-import axios from "axios";
+import _axios from "axios";
 
-export const REACT_APP_API_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL
+    || "http://localhost:4000";
 // "http://localhost:4000"
 // "http://ec2-34-228-111-190.compute-1.amazonaws.com:4000"
 
-export const api = axios.create({withCredentials: true});
+const handleRes = res => {
+  return res;
+};
+
+const handleErr = err => {
+  console.log(err);
+  return err;
+}
+
+const axios = _axios;
+axios.interceptors.request.use(handleRes, handleErr);
+axios.interceptors.response.use(handleRes, handleErr);
+
+const api = _axios.create({withCredentials: true});
+api.interceptors.request.use(handleRes, handleErr);
+api.interceptors.response.use(handleRes, handleErr);
+
+export {
+  REACT_APP_API_URL,
+  api,
+  axios
+}

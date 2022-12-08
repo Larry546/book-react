@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {loginThunk} from "../../services/user/user-thunks";
 import HomeButton from "../common/header/home-button";
+import {Alert} from "react-bootstrap";
 
 const Login = () => {
     const {currentUser} = useSelector(state => state.user)
@@ -10,9 +11,15 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
 
+    const [error, setError] = useState("");
+
     const login = () => {
         dispatch(loginThunk({username, password}));
+        if (!currentUser) {
+            setError("Login failed!");
+        }
     }
+
     if (currentUser) {
         return (<Navigate to={'/profile'}/>);
     }
@@ -40,7 +47,12 @@ const Login = () => {
                              value={password}
                              onChange={e => setPassword(e.target.value)}
                       />
-                      <button className="btn btn-warning rounded w-100 mt-5" onClick={login}>Log In</button>
+
+                      <Alert className="mt-3 mb-0" variant="danger" show={error.length > 0}>
+                          {error}
+                      </Alert>
+
+                      <button className="btn btn-warning rounded w-100 mt-4" onClick={login}>Log In</button>
                       <p className="text-center mt-3">Don't have an account?
                           <span>
                               {/*todo signup*/}

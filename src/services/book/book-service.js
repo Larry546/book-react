@@ -1,4 +1,4 @@
-import axios from "axios";
+import {axios} from "../config";
 
 const REMOTE_API = "https://api.itbook.store/1.0";
 

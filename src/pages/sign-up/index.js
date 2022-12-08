@@ -1,62 +1,130 @@
-import {Link} from "react-router-dom";
-import React from "react";
+import {Link, useNavigate} from "react-router-dom";
+import React, {useState} from "react";
 import HomeButton from "../common/header/home-button";
+import {Alert} from "react-bootstrap";
+import {signup} from "../../services/user/user-service";
 
 const SignUp = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [conPassword, setConPassword] = useState("");
+  const [fullname, setFullname] = useState("");
+  const [email, setEmail] = useState("");
+  const [isCreator, setIsCreator] = useState(false);
 
-    return (
-        <div className="container">
-            <div className="row">
-                <div className="col-5">
-                    <div className="position-absolute top-0 end-20">
-                        <HomeButton/>
-                    </div>
-                    <img className="col-12" src="/images/bookship.jpeg" alt="illustration"/>
-                </div>
-                <div className="col-6 offset-1 d-flex align-items-center justify-content-center mt-3">
-                    <div>
-                        <h2 className="text-center">Welcome to Sign Up an Account</h2>
-                        <label htmlFor="UsernameInput" className="col-form-label">Username</label>
-                        <input className="form-control" id="UsernameInput"/>
+  const [error, setError] = useState("");
 
-                        <label htmlFor="PasswdInput" className="col-form-label">Password</label>
-                        <input type="password" className="form-control" id="PasswdInput"/>
+  const navigate = useNavigate();
 
-                        <label htmlFor="FullNameInput" className="col-form-label">FullName</label>
-                        <input className="form-control" id="FullNameInput"/>
+  const handleSignUp = async () => {
+    if (password !== conPassword) {
+      setError("Please check your password!");
+      return;
+    }
 
-                        <label htmlFor="EmailInput" className="col-form-label">Email</label>
-                        <input type="email" className="form-control" id="EmailInput"/>
+    const userinfo = {
+      username,
+      password,
+      fullname,
+      email,
+      role: isCreator ? "creator" : "common"
+    };
 
-                        <label htmlFor="BirthdayInput" className="col-form-label">Date of
-                            Birth</label>
-                        <input className="form-control" id="BirthdayInput"/>
+    const res = await signup(userinfo);
+    if (!res) {
+      setError("Sign up Error!");
+      return;
+    }
 
-                        <label htmlFor="LocationInput" className="col-form-label">Location</label>
-                        <input className="form-control" id="LocationInput"/>
+    navigate('/login');
+  }
 
-                        <div className="form-check mt-3">
-                            <label className="form-check-label" htmlFor="SignUpCheckBox">
-                                Premium Membership
-                            </label>
-                            <input className="form-check-input" type="checkbox" id="SignUpCheckBox"/>
-                        </div>
-
-                        <div className="row justify-content-center">
-                            <div className="col-5">
-                                <button
-                                    className="btn btn-warning rounded w-100 mt-5">Sign Up</button>
-                            </div>
-                            <div className="col-5 offset-1">
-                                <Link to="/login"><button
-                                    className="btn btn-secondary rounded w-100 mt-5 ms-1">Cancel</button></Link>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+  return (
+      <div className="container">
+        <div className="row">
+          <div className="col-5">
+            <div className="position-absolute top-0 end-20">
+              <HomeButton/>
             </div>
+            <img className="col-12" src="/images/bookship.jpeg"
+                 alt="illustration"/>
+          </div>
+          <div
+              className="col-6 offset-1 d-flex align-items-center justify-content-center mt-3">
+            <div>
+              <h2 className="text-center">Welcome to Sign Up an Account</h2>
+              <label htmlFor="UsernameInput"
+                     className="col-form-label">Username</label>
+              <input className="form-control" id="UsernameInput"
+                     value={username}
+                     onChange={e => setUsername(e.target.value)}
+              />
+
+              <label htmlFor="PasswdInput"
+                     className="col-form-label">Password</label>
+              <input type="password" className="form-control" id="PasswdInput"
+                     value={password}
+                     onChange={e => setPassword(e.target.value)}
+              />
+
+              <label htmlFor="ConPasswdInput" className="col-form-label">Confirm
+                Password</label>
+              <input type="password" className="form-control"
+                     id="ConPasswdInput"
+                     value={conPassword}
+                     onChange={e => setConPassword(e.target.value)}
+              />
+
+              <label htmlFor="FullNameInput"
+                     className="col-form-label">FullName</label>
+              <input className="form-control" id="FullNameInput"
+                     value={fullname}
+                     onChange={e => setFullname(e.target.value)}
+              />
+
+              <label htmlFor="EmailInput"
+                     className="col-form-label">Email</label>
+              <input type="email" className="form-control" id="EmailInput"
+                     value={email}
+                     onChange={e => setEmail(e.target.value)}
+              />
+
+              <div className="form-check mt-3">
+                <label className="form-check-label" htmlFor="SignUpCheckBox">
+                  Creator
+                </label>
+                <input className="form-check-input" type="checkbox"
+                       id="SignUpCheckBox"
+                       checked={isCreator}
+                       onChange={e => setIsCreator(e.target.value)}
+                />
+              </div>
+
+              <Alert className="mt-3 mb-0" variant="danger" show={error.length > 0}>
+                {error}
+              </Alert>
+
+              <div className="row justify-content-center mt-4">
+                <div className="col-5">
+                  <button
+                      className="btn btn-warning rounded w-100"
+                      onClick={handleSignUp}
+                  >
+                    Sign Up
+                  </button>
+                </div>
+                <div className="col-5 offset-1">
+                  <Link to="/login"
+                        className="btn btn-secondary rounded w-100 ms-1">
+                    Cancel
+                  </Link>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
-    );
+      </div>
+  );
 }
 export default SignUp;
