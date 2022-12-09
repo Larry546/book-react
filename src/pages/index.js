@@ -28,7 +28,7 @@ function MyApp() {
             <Route index element={<Home/>}/>
             <Route path="login" element={<Login/>}/>
             <Route path="search" element={<Search/>}/>
-            <Route path="booklist" element={<BookList/>}/>
+            <Route path="booklist/:lid" element={<BookList/>}/>
             <Route path="profile" element={<Profile/>}/>
             <Route path="profile/:uid" element={<ProfileOther/>}/>
             <Route path="edit-profile" element={<EditProfile/>}/>

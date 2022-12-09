@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Header from "../../common/header";
-import ListComponent from "../../common/list-component/list-component";
+import ListComponent from "../../common/list-component";
 import {useParams} from "react-router";
 import {useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
@@ -10,6 +10,7 @@ import {
   getFolloweeCount,
   getFollowerCount, unfollow
 } from "../../../services/follow/follow-service";
+import {getUserLikedBook} from "../../../services/like-book/like-book-service";
 
 const ProfileOther = () => {
   const {uid} = useParams();
@@ -18,6 +19,7 @@ const ProfileOther = () => {
   const [follower, setFollower] = useState("0");
   const [followee, setFollowee] = useState("0");
   const [isFollow, setIsFollow] = useState("");
+  const [likedBook, setLikedBook] = useState([]);
 
   useEffect(() => {
     const getUserInfo = async () => {
@@ -28,6 +30,9 @@ const ProfileOther = () => {
       const followeeCnt = await getFolloweeCount(uid);
       setFollower(followerCnt);
       setFollowee(followeeCnt);
+
+      const likedBooks = await getUserLikedBook(uid);
+      setLikedBook(likedBooks);
 
       if (currentUser && currentUser._id) {
         const res = await findFollow(uid, currentUser._id);
@@ -51,8 +56,7 @@ const ProfileOther = () => {
         setIsFollow("");
         setFollower((parseInt(follower) - 1).toString());
       }
-    }
-    else {
+    } else {
       const info = {
         follower: currentUser._id,
         followee: uid
@@ -98,7 +102,7 @@ const ProfileOther = () => {
             </div>}
 
         <div className="mt-4">
-          <ListComponent title="LIKED BOOKS"/>
+          {likedBook && <ListComponent title="LIKED BOOKS" lists={likedBook}/>}
           <ListComponent title="LIKED BOOKLISTS"/>
         </div>
       </div>

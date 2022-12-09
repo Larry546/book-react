@@ -1,8 +1,43 @@
 import UserButton from "../common/header/user-button";
 import SearchButton from "../common/header/search-button";
-import ListComponent from "../common/list-component/list-component";
+import ListComponent from "../common/list-component";
+import {useSelector} from "react-redux";
+import {useEffect, useState} from "react";
+import {getNewBooks} from "../../services/book/book-service";
+import {getUserLikedBook} from "../../services/like-book/like-book-service";
+import {getLatestBookList} from "../../services/booklist/booklist-service";
 
 const Home = () => {
+  const {currentUser} = useSelector(state => state.user);
+  const [books, setBooks] = useState([]);
+  const [lists, setLists] = useState([]);
+  const [isLike, setIsLike] = useState(false);
+  useEffect(() => {
+    const getData = async () => {
+      let list;
+      if (currentUser) {
+        // like book
+        list = await getUserLikedBook(currentUser._id)
+        if (list && list.length > 0) {
+          setIsLike(true);
+        }
+      }
+      if (!list || list.length === 0) {
+        // new book
+        const res = await getNewBooks();
+        list = res.books
+      }
+      if (list && list.length) {
+        if (list.length > 4) {
+          list = list.slice(0, 4);
+        }
+        setBooks(list);
+      }
+      const listsRes = await getLatestBookList();
+      setLists(listsRes);
+    }
+    getData().catch(err => console.log(err));
+  }, [currentUser])
   return (
       <div className="container">
         <div className="d-flex align-items-center justify-content-between">
@@ -22,8 +57,8 @@ const Home = () => {
         </div>
 
         <div className="mt-4">
-          <ListComponent title="LIKED BOOKS"/>
-          <ListComponent title="LATEST BOOKLISTS" isList={true}/>
+          <ListComponent title={isLike ? "LIKED BOOKS" : "NEW BOOKS"} lists={books}/>
+          <ListComponent title="LATEST BOOKLISTS" isList={true} lists={lists}/>
         </div>
       </div>
   );

@@ -13,6 +13,12 @@ import {
   unlikebook
 } from "../../services/like-book/like-book-service";
 import {Link} from "react-router-dom";
+import PopupModal from "../common/popup-modal";
+import {
+  addBookToList,
+  getUserBookLists
+} from "../../services/booklist/booklist-service";
+import {Alert, Button} from "react-bootstrap";
 
 const Book = () => {
   const {isbn} = useParams();
@@ -21,6 +27,9 @@ const Book = () => {
   const [comments, setComments] = useState([]);
   const [curComment, setCurComment] = useState("");
   const [like, setLike] = useState("");
+  const [showLists, setShowLists] = useState(false);
+  const [booklists, setBookLists] = useState([]);
+  const [alert, setAlert] = useState(null);
 
   useEffect(() => {
     const fetchInfo = async () => {
@@ -30,6 +39,10 @@ const Book = () => {
         let likeRes = await findUserLikeBook(currentUser._id, isbn);
         if (likeRes.length && likeRes[0]._id) {
           setLike(likeRes[0]._id);
+        }
+        if (currentUser.role === 'creator') {
+          let lists = await getUserBookLists(currentUser._id);
+          setBookLists(lists);
         }
       }
       setBookInfo(res);
@@ -49,7 +62,12 @@ const Book = () => {
       return;
     }
     if (!like.length) {
-      const likeinfo = {user: currentUser._id, book: isbn};
+      const likeinfo = {
+        user: currentUser._id,
+        isbn13: isbn,
+        image: bookInfo.image,
+        title: bookInfo.title
+      };
       const res = await likebook(likeinfo);
       if (res && res._id) {
         setLike(res._id);
@@ -62,6 +80,24 @@ const Book = () => {
     }
   }
 
+  const handleAddToList = async (lid) => {
+    const book = {
+      isbn13: isbn,
+      image: bookInfo.image,
+      title: bookInfo.title,
+      subtitle: bookInfo.subtitle,
+      authors: bookInfo.authors,
+      rating: bookInfo.rating
+    }
+    const res = await addBookToList(lid, book);
+    if (res && res.acknowledged) {
+      setAlert({type: 0, message: "Add succeed!"})
+    }
+    else {
+      setAlert({type: 1, message: "Add failed!"})
+    }
+  }
+
   return (
       <div className="container">
         <Header/>
@@ -71,14 +107,50 @@ const Book = () => {
               <img className="rounded-bottom"
                    src={bookInfo.image} alt={"BOOK"} width="100%"/>
             </div>
-            <div className="d-flex justify-content-center p-1"
-                 onClick={handleLike}>
-              {like.length ?
-                  <i className="bi bi-heart-fill fw-bolder fs-2 text-danger"></i>
-                  :
-                  <i className="bi bi-heart fw-bolder fs-2 text-secondary"></i>}
+            <div className="d-flex justify-content-center align-items-center">
+              <div className="p-1"
+                   onClick={handleLike}>
+                {like.length ?
+                    <i className="bi bi-heart-fill fw-bolder fs-2 text-danger"></i>
+                    :
+                    <i className="bi bi-heart fw-bolder fs-2 text-secondary"></i>}
+
+              </div>
+              {currentUser && currentUser.role === 'creator' &&
+                  <div>
+                    <div className="d-flex justify-content-center p-1 ms-5"
+                         onClick={() => {setShowLists(true)}}
+                    >
+                      <i className="bi bi-bookmark-plus fs-3"></i>
+                    </div>
+
+                    <PopupModal
+                        title={"Add to BookList"}
+                        show={showLists}
+                        handleClose={() => {setShowLists(false)}}>
+                      {booklists && booklists.length > 0 ?
+                          <div>
+                            {booklists.map((list, idx) =>
+                              <div key={idx}
+                                   className="d-flex justify-content-between align-items-center mb-2">
+                                <div className="fw-bold fs-5">
+                                  {list.title}
+                                </div>
+                                <Button onClick={() => {handleAddToList(list._id)}}>add</Button>
+                              </div>
+                            )}
+                            {alert && alert.message &&
+                              <Alert variant={alert.type === 1 ? "danger" : "success"}>{alert.message}</Alert>
+                            }
+                          </div>
+                          : <div className="fw-bold text-center">No Book List</div>}
+                    </PopupModal>
+                  </div>
+              }
 
             </div>
+
+
           </div>
           <div className="card mt-3 col-8 wd-bg-sameblue">
             <div className="card-header">Book Details</div>
@@ -110,7 +182,11 @@ const Book = () => {
                 </div>
                 <div className="mb-3">
                   <h5>More details: </h5>
-                  <span className="text-secondary">{bookInfo.url}</span>
+                  <span
+                      className="text-secondary text-decoration-none"
+                      onClick={() => window.location.href = bookInfo.url}
+                  >
+                    Click me!</span>
                 </div>
               </form>
             </div>

@@ -11,3 +11,8 @@ export const searchBook = async (keyword, page = 1) => {
   const response = await axios.get(`${REMOTE_API}/search/${keyword}?page=${page}`);
   return response.data;
 }
+
+export const getNewBooks = async () => {
+  const response = await axios.get(`${REMOTE_API}/new`);
+  return response.data;
+}

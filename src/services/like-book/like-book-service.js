@@ -16,3 +16,8 @@ export const findUserLikeBook = async (uid, isbn) => {
   const response = await api.get(`${LIKEBOOK_API_URL}/user/${uid}/book/${isbn}`);
   return response.data;
 }
+
+export const getUserLikedBook = async (uid) => {
+  const response = await api.get(`${LIKEBOOK_API_URL}/getLikeBooksByUser/${uid}`);
+  return response.data;
+}
