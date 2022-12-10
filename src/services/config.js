@@ -2,8 +2,6 @@ import _axios from "axios";
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
     || "http://localhost:4000";
-// "http://localhost:4000"
-// "http://ec2-34-228-111-190.compute-1.amazonaws.com:4000"
 
 const handleRes = res => {
   return res;
