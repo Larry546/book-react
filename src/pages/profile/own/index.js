@@ -16,6 +16,7 @@ import {
   getUserBookLists
 } from "../../../services/booklist/booklist-service";
 import {getUserLikedBook} from "../../../services/like-book/like-book-service";
+import {getUserLikedLists} from "../../../services/like-list/like-list-service";
 
 const Profile = () => {
   const {currentUser} = useSelector(state => state.user);
@@ -26,6 +27,7 @@ const Profile = () => {
   const [showEditBookList, setShowEditBookList] = useState(false);
   const [bookLists, setBookLists] = useState([]);
   const [likedBook, setLikedBook] = useState([]);
+  const [likedList, setLikedList] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
@@ -42,6 +44,10 @@ const Profile = () => {
 
       const likedBooks = await getUserLikedBook(currentUser._id);
       setLikedBook(likedBooks);
+
+      const likedLists = await getUserLikedLists(currentUser._id);
+      const lists = likedLists.map(l => l.bookList);
+      setLikedList(lists);
     }
 
     getInfo().catch(err => console.log(err))
@@ -215,9 +221,9 @@ const Profile = () => {
         <div className="mt-4 wd-bg-blue">
           {currentUser && currentUser.role === "creator" && bookLists.length > 0 &&
               <ListComponent title="CREATED BOOKLISTS" isList={true} lists={bookLists}/>}
-          {likedBook && likedBook.length > 0 && <ListComponent title="LIKED BOOKS" lists={likedBook}/>}
+          {likedBook && <ListComponent title="LIKED BOOKS" lists={likedBook}/>}
           {currentUser && currentUser.role === 'common' &&
-              <ListComponent title="LIKED BOOKLISTS"/>}
+              <ListComponent title="LIKED BOOKLISTS" lists={likedList} isList={true}/>}
         </div>
       </div>
   );

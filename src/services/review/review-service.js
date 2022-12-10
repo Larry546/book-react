@@ -11,3 +11,8 @@ export const getReviewByBook = async (isbn) => {
   const response = await api.get(`${REVIEW_API_URL}/getReviewsByBook/${isbn}`);
   return response.data;
 }
+
+export const deleteReview = async (rid) => {
+  const response = await api.delete(`${REVIEW_API_URL}/deleteReview/${rid}`);
+  return response.data;
+}

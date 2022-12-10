@@ -4,7 +4,7 @@ import {useParams} from "react-router";
 import {getBookInfo} from "../../services/book/book-service";
 import {useSelector} from "react-redux";
 import {
-  createReview,
+  createReview, deleteReview,
   getReviewByBook
 } from "../../services/review/review-service";
 import {
@@ -92,11 +92,20 @@ const Book = () => {
     const res = await addBookToList(lid, book);
     if (res && res.acknowledged) {
       setAlert({type: 0, message: "Add succeed!"})
-    }
-    else {
+    } else {
       setAlert({type: 1, message: "Add failed!"})
     }
   }
+
+  const handleDelete = async (rid, idx) => {
+    const res = await deleteReview(rid);
+    if (res && res.acknowledged) {
+      let cpComments = JSON.parse(JSON.stringify(comments));
+      cpComments.splice(idx, 1);
+      setComments(cpComments);
+    }
+  }
+
 
   return (
       <div className="container">
@@ -119,7 +128,9 @@ const Book = () => {
               {currentUser && currentUser.role === 'creator' &&
                   <div>
                     <div className="d-flex justify-content-center p-1 ms-5"
-                         onClick={() => {setShowLists(true)}}
+                         onClick={() => {
+                           setShowLists(true)
+                         }}
                     >
                       <i className="bi bi-bookmark-plus fs-3"></i>
                     </div>
@@ -127,23 +138,29 @@ const Book = () => {
                     <PopupModal
                         title={"Add to BookList"}
                         show={showLists}
-                        handleClose={() => {setShowLists(false)}}>
+                        handleClose={() => {
+                          setShowLists(false)
+                        }}>
                       {booklists && booklists.length > 0 ?
                           <div>
                             {booklists.map((list, idx) =>
-                              <div key={idx}
-                                   className="d-flex justify-content-between align-items-center mb-2">
-                                <div className="fw-bold fs-5">
-                                  {list.title}
+                                <div key={idx}
+                                     className="d-flex justify-content-between align-items-center mb-2">
+                                  <div className="fw-bold fs-5">
+                                    {list.title}
+                                  </div>
+                                  <Button onClick={() => {
+                                    handleAddToList(list._id)
+                                  }}>add</Button>
                                 </div>
-                                <Button onClick={() => {handleAddToList(list._id)}}>add</Button>
-                              </div>
                             )}
                             {alert && alert.message &&
-                              <Alert variant={alert.type === 1 ? "danger" : "success"}>{alert.message}</Alert>
+                                <Alert variant={alert.type === 1 ? "danger"
+                                    : "success"}>{alert.message}</Alert>
                             }
                           </div>
-                          : <div className="fw-bold text-center">No Book List</div>}
+                          : <div className="fw-bold text-center">No Book
+                            List</div>}
                     </PopupModal>
                   </div>
               }
@@ -216,7 +233,9 @@ const Book = () => {
                             key={idx}
                             className="list-group-item border-bottom rounded-0 wd-bg-sameblue">
                           {currentUser && currentUser.role === "admin" &&
-                              <div className="float-end">
+                              <div className="float-end p-1" onClick={() => {
+                                handleDelete(c._id, idx)
+                              }}>
                                 <i className="bi bi-trash"></i>
                               </div>
                           }

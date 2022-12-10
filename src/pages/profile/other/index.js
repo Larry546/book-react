@@ -11,6 +11,8 @@ import {
   getFollowerCount, unfollow
 } from "../../../services/follow/follow-service";
 import {getUserLikedBook} from "../../../services/like-book/like-book-service";
+import {getUserLikedLists} from "../../../services/like-list/like-list-service";
+import {getUserBookLists} from "../../../services/booklist/booklist-service";
 
 const ProfileOther = () => {
   const {uid} = useParams();
@@ -20,6 +22,9 @@ const ProfileOther = () => {
   const [followee, setFollowee] = useState("0");
   const [isFollow, setIsFollow] = useState("");
   const [likedBook, setLikedBook] = useState([]);
+  const [likedList, setLikedList] = useState([]);
+  const [createLists, setCreateLists] = useState([]);
+
 
   useEffect(() => {
     const getUserInfo = async () => {
@@ -33,6 +38,15 @@ const ProfileOther = () => {
 
       const likedBooks = await getUserLikedBook(uid);
       setLikedBook(likedBooks);
+
+      const likedLists = await getUserLikedLists(uid);
+      const lists = likedLists.map(l => l.bookList);
+      setLikedList(lists);
+
+      if (res && res.role === 'creator') {
+        const createListsRes = await getUserBookLists(res._id);
+        setCreateLists(createListsRes);
+      }
 
       if (currentUser && currentUser._id) {
         const res = await findFollow(uid, currentUser._id);
@@ -102,8 +116,10 @@ const ProfileOther = () => {
             </div>}
 
         <div className="mt-4">
+          {userinfo && userinfo.role === "creator" && createLists && createLists.length > 0 &&
+              <ListComponent title="CREATED BOOKLISTS" isList={true} lists={createLists}/>}
           {likedBook && <ListComponent title="LIKED BOOKS" lists={likedBook}/>}
-          <ListComponent title="LIKED BOOKLISTS"/>
+          {userinfo && userinfo.role === ('common' || 'admin') && likedList && <ListComponent title="LIKED BOOKLISTS" lists={likedList} isList={true}/>}
         </div>
       </div>
   );

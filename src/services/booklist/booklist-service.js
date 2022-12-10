@@ -31,3 +31,8 @@ export const getBookList = async (lid) => {
   const response = await api.get(`${BOOKLIST_API_URL}/getList/${lid}`);
   return response.data;
 }
+
+export const deleteBookInList = async (lid, bid) => {
+  const response = await api.delete(`${BOOKLIST_API_URL}/delete/${lid}/${bid}`);
+  return response.data;
+}

@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 
 const ListComponent = ({
   title,
-  isList,
+  isList = false,
   lists
 }) => {
   return (
