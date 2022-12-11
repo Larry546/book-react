@@ -12,7 +12,7 @@ import {
   likebook,
   unlikebook
 } from "../../services/like-book/like-book-service";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import PopupModal from "../common/popup-modal";
 import {
   addBookToList,
@@ -30,6 +30,7 @@ const Book = () => {
   const [showLists, setShowLists] = useState(false);
   const [booklists, setBookLists] = useState([]);
   const [alert, setAlert] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchInfo = async () => {
@@ -59,7 +60,7 @@ const Book = () => {
 
   const handleLike = async () => {
     if (!currentUser) {
-      return;
+      navigate('/login');
     }
     if (!like.length) {
       const likeinfo = {

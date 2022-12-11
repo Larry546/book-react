@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import Header from "../common/header";
 import {useParams} from "react-router";
@@ -18,8 +18,8 @@ const BookList = () => {
   const [list, setList] = useState({});
   const {currentUser} = useSelector(state => state.user);
   const [showDelete, setShowDelete] = useState(false);
-  const [showLike, setShowLike] = useState(false);
   const [like, setLike] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getData = async () => {
@@ -30,7 +30,6 @@ const BookList = () => {
         setShowDelete(true);
       }
       if (currentUser && currentUser.role === 'common') {
-        setShowLike(true);
         const likeRes = await findUserLikeList(currentUser._id, lid);
         if (likeRes.length && likeRes[0]._id) {
           setLike(likeRes[0]._id);
@@ -52,7 +51,7 @@ const BookList = () => {
 
   const handleLike = async () => {
     if (!currentUser) {
-      return;
+      navigate('/login');
     }
     if (!like.length) {
       const likeinfo = {
@@ -78,21 +77,20 @@ const BookList = () => {
           <div>
             <h1 className="ps-3 pt-3">{list && list.title}</h1>
             <span className="fw-bold ps-3 pt-3">
-          Created by
+              Created by
                 <Link to={`/profile/${list && list.creator ? list.creator._id
                     : "#"}`} className="wd-link"> {list && list.creator
                     && (list.creator.fullname || list.creator.username)}
                 </Link>
-        </span>
+            </span>
             <p className="ps-3 pt-3">{list && list.intro}</p>
           </div>
-          {showLike && <div className="p-2" onClick={handleLike}>
+          <div className="p-2" onClick={handleLike}>
             {like.length ?
                 <i className="bi bi-heart-fill fw-bolder fs-2 text-danger"></i>
                 :
                 <i className="bi bi-heart fw-bolder fs-2 text-secondary"></i>}
           </div>
-          }
         </div>
 
         <div className="my-4 wd-bg-blue rounded">
