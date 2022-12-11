@@ -81,7 +81,7 @@ const BookList = () => {
           Created by
                 <Link to={`/profile/${list && list.creator ? list.creator._id
                     : "#"}`} className="wd-link"> {list && list.creator
-                    && list.creator.fullname}
+                    && (list.creator.fullname || list.creator.username)}
                 </Link>
         </span>
             <p className="ps-3 pt-3">{list && list.intro}</p>

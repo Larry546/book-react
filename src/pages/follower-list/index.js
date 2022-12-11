@@ -31,10 +31,10 @@ const FollowingList = () => {
                   followers.map((f, idx) =>
                       <div key={idx} className="col-lg-6 col-md-12 col-sm-12">
                         <li className="list-group-item">
-                          <div className="row">
-                              <div className="fw-bold ms-1">{f.follower.fullname}</div>
+                          <Link className="row text-decoration-none" to={`/profile/${f.follower._id}`}>
+                              <div className="fw-bold ms-1 text-black">{f.follower.fullname}</div>
                               <div className="text-secondary ms-1">@{f.follower.username}</div>
-                          </div>
+                          </Link>
                         </li>
                       </div>)
                   :

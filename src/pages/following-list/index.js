@@ -43,10 +43,10 @@ const FollowingList = () => {
                       <div key={idx} className="col-lg-6 col-md-12 col-sm-12">
                         <li className="list-group-item">
                           <div className="row">
-                            <div className="col-8">
-                              <div className="fw-bold ms-1">{f.followee.fullname}</div>
+                            <Link className="col-8 text-decoration-none" to={`/profile/${f.followee._id}`}>
+                              <div className="fw-bold ms-1 text-black">{f.followee.fullname}</div>
                               <div className="text-secondary ms-1">@{f.followee.username}</div>
-                            </div>
+                            </Link>
                             <div className="col-4">
                               <button className="btn btn-primary rounded-pill"
                                       onClick={() => {
