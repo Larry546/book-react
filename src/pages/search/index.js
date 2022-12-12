@@ -1,24 +1,39 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import HomeButton from "../common/header/home-button";
 import UserButton from "../common/header/user-button";
 import {searchBook} from "../../services/book/book-service";
 import BookComponent from "../common/book-component";
+import {useNavigate, useSearchParams} from "react-router-dom";
 
 const Search = () => {
-  const [keyword, setKeyword] = useState("");
+  const [searchParams] = useSearchParams();
+  const searchKeyword = searchParams.get('keyword') || "";
+  const searchPage = searchParams.get('page') && searchParams.get('page') > 0
+      ? searchParams.get('page') : "1";
+  const [keyword, setKeyword] = useState(searchKeyword);
   const [searchResult, setSearchResult] = useState({});
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getResult = async () => {
+      const res = await searchBook(searchKeyword, searchPage);
+      setSearchResult(res);
+    };
+
+    if (searchKeyword) {
+      getResult().catch(err => console.log(err));
+    }
+  }, [searchKeyword, searchPage])
+
   const handleSearch = async () => {
-    const res = await searchBook(keyword);
-    setSearchResult(res);
+    navigate(`/search?keyword=${keyword}`);
   }
   const handleNextPages = async () => {
-    const res = await searchBook(keyword, parseInt(searchResult.page) + 1);
-    setSearchResult(res);
+    navigate(`/search?keyword=${keyword}&page=${parseInt(searchPage) + 1}`);
   }
 
   const handlePrePages = async () => {
-    const res = await searchBook(keyword, parseInt(searchResult.page) - 1);
-    setSearchResult(res);
+    navigate(`/search?keyword=${keyword}&page=${parseInt(searchPage) - 1}`);
   }
 
   return (
@@ -64,12 +79,17 @@ const Search = () => {
               </div>
 
               <div align="middle" className="my-3">
-                <button className="btn rounded-pill" onClick={handlePrePages}>← Previous</button>
-                {/*page1: class="invisible"*/}
+                <button className="btn rounded-pill" onClick={handlePrePages}
+                        hidden={searchPage === '1'}>
+                  ← Previous
+                </button>
                 <span
                     className="align-middle fw-bold"> Page {searchResult.page}
                 </span>
-                <button className="btn rounded-pill" onClick={handleNextPages}>Next →</button>
+                <button className="btn rounded-pill"
+                        onClick={handleNextPages}>
+                  Next →
+                </button>
               </div>
             </div> :
             <div
