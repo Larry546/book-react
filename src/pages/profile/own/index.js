@@ -30,6 +30,7 @@ const Profile = () => {
   const [likedList, setLikedList] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   useEffect(() => {
     const getInfo = async () => {
       const followerCnt = await getFollowerCount(currentUser._id);
@@ -52,6 +53,7 @@ const Profile = () => {
 
     getInfo().catch(err => console.log(err))
   }, [currentUser])
+
   if (!currentUser) {
     return <Navigate to='/login'/>
   }

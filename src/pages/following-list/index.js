@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {
   getFolloweeList,
@@ -16,6 +16,10 @@ const FollowingList = () => {
     }
     fetchList().catch(err => console.log(err));
   }, [currentUser])
+
+  if (!currentUser) {
+    return <Navigate to='/login'/>
+  }
 
   const handleUnfollow = async (idx) => {
 
