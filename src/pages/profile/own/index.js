@@ -221,11 +221,11 @@ const Profile = () => {
           </Link>
         </div>
         <div className="mt-4 wd-bg-blue">
+          {likedBook && <ListComponent title="LIKED BOOKS" lists={likedBook}/>}
+          {currentUser &&
+              <ListComponent title="LIKED BOOKLISTS" lists={likedList} isList={true}/>}
           {currentUser && currentUser.role === "creator" && bookLists.length > 0 &&
               <ListComponent title="CREATED BOOKLISTS" isList={true} lists={bookLists}/>}
-          {likedBook && <ListComponent title="LIKED BOOKS" lists={likedBook}/>}
-          {currentUser && currentUser.role === 'common' &&
-              <ListComponent title="LIKED BOOKLISTS" lists={likedList} isList={true}/>}
         </div>
       </div>
   );
