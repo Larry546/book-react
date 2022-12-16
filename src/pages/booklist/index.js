@@ -29,7 +29,7 @@ const BookList = () => {
           === currentUser._id) {
         setShowDelete(true);
       }
-      if (currentUser && currentUser.role === 'common') {
+      if (currentUser) {
         const likeRes = await findUserLikeList(currentUser._id, lid);
         if (likeRes.length && likeRes[0]._id) {
           setLike(likeRes[0]._id);
